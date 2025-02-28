@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
   int values[MAX_LINES];
   int pieceCount = parse_input_file(argv[1], lengths, values);
 
-  // if there isn't anything to read, notify user
+  // if there isn't anything to read, notify user 
   if (pieceCount == 0) {
     fprintf(stderr, "No piece definitions read from input!\n");
     return EXIT_FAILURE;

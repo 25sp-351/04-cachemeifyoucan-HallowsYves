@@ -4,7 +4,7 @@
 int bestValueForLength[MAX_ROD_LENGTH + 1];
 int chosenPiece[MAX_ROD_LENGTH + 1];
 
-int solve_rod_cutting(int rodLength, int lengths[], int values[], int pieceCount) {
+void solve_rod_cutting(int rodLength, int lengths[], int values[], int pieceCount) {
     for (int i = 0; i <= rodLength; i++) {
         bestValueForLength[i] = 0;
         chosenPiece[i] = -1;
@@ -15,7 +15,10 @@ int solve_rod_cutting(int rodLength, int lengths[], int values[], int pieceCount
         int pieceValue = values[i];
 
         for (int currentLength = pieceLength; currentLength <= rodLength; currentLength++) {
-            int candidateValue = (*rod_cut_provider)(currentLength - pieceLength, lengths, values, pieceCount) + pieceValue;
+            int candidateValue = bestValueForLength[currentLength - pieceLength] + pieceValue;
+
+            printf("Checking piece length %d (value %d) at rod length %d: candidateValue = %d\n", 
+                pieceLength, pieceValue, currentLength, candidateValue);
 
             if (candidateValue > bestValueForLength[currentLength]) {
                 bestValueForLength[currentLength] = candidateValue;
@@ -23,8 +26,10 @@ int solve_rod_cutting(int rodLength, int lengths[], int values[], int pieceCount
             }
         }
     }
-    return bestValueForLength[rodLength];
+
+    printf("Final computed max value for rod length %d: %d\n", rodLength, bestValueForLength[rodLength]);
 }
+
 
 void print_solution(int rodLength, int lengths[], int values[], int pieceCount) {
     int usage[MAX_LINES] = {0};
