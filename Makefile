@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -pedantic -std=c11
 OUTPUT = rod_cut
 
-SOURCES = rod_cut.c rod_input.c rod_logic.c rod_parse.c cache.c
+SOURCES = rod_cut.c rod_logic.c parse_and_read.c cache.c
 
 # Convert .c files to .o files
 OBJECTS = $(SOURCES:.c=.o)
